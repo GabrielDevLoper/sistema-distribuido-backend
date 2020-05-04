@@ -84,14 +84,14 @@ module.exports = {
             else {
                 if (data.FaceMatches.length === 0) {
                     console.log('Usuário não cadastrado');
-                    return res.json({ message: 'Usuário não cadastrado na aws'});  
+                    return res.json({ message: 'Usuário não cadastrado'});  
                 }
                 else{
                     const faceids = data.FaceMatches[0].Face.FaceId;
                     const user = await User.find({faceid: faceids});
 
                     if(!user) {
-                        return res.json({message: 'Usuário não cadastrado no banco de dados'});  
+                        return res.json({message: 'Usuário não cadastrado'});  
                         
                     }
                        
