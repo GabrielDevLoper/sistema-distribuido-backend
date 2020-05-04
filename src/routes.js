@@ -13,6 +13,7 @@ const uploadAws = multer();
 routes.post('/users', uploadAws.single('myfile_index') , UserController.store);
 routes.post('/show-users', uploadAws.single('myfile_procurar') , UserController.show);
 routes.get('/users', UserController.index);
+routes.delete('/users/:faceId', UserController.deleteFacesAndUser);
 
 
 

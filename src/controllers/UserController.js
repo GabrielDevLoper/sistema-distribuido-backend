@@ -108,5 +108,34 @@ module.exports = {
                 }  
             }
         });
-    }
+    },
+
+
+    async deleteFacesAndUser(req, res){
+
+        const {faceId} = req.params;
+        
+        aws.config.update({ region: 'us-east-1' });
+        var rekognition = new aws.Rekognition();
+
+        var params = {
+            CollectionId: "usuarios", 
+            FaceIds: [
+                faceId
+            ]
+           };
+           rekognition.deleteFaces(params, async function(err, data) {
+             if(err){
+                console.log(err, err.stack); // an error occurred
+             } 
+             else{
+                await User.findOneAndDelete({faceid:faceId}); 
+                //console.log(data); successful response
+                return res.json({message: "Usuário Excluído com sucesso!"});
+             }     
+             
+           });
+    },
+
+
 }
