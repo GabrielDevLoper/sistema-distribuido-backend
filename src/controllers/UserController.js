@@ -2,7 +2,7 @@ const User = require('../models/User');
 const aws = require('aws-sdk');
 global.atob = require('atob');
 
-var user1 = null;
+
 
 module.exports = {
     async index(req, res) {
@@ -28,7 +28,7 @@ module.exports = {
             QualityFilter: 'AUTO',
         };
 
-        await rekognition.indexFaces(params, function (err, data) {
+        rekognition.indexFaces(params, function (err, data) {
 
             if (err) {
                 console.log(err, err.stack); // an error occurred
@@ -101,9 +101,6 @@ module.exports = {
                     console.log(`Usuário Encontrado FaceID:  ${faceids}`);
 
                     return res.json(user); 
-
-                    
-
                     
                 }  
             }
